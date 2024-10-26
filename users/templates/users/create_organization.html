@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить организацию</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Подключение Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Подключение собственного стиля -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4"><i class="fas fa-plus-circle"></i> Добавить организацию</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="card p-4">
+            <!-- Поле "Название организации" -->
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                <small class="text-danger">{{ form.name.errors }}</small>
+            </div>
+            <!-- Поле "Адрес" -->
+            <div class="form-group">
+                {{ form.address.label_tag }}
+                {{ form.address }}
+                <small class="text-danger">{{ form.address.errors }}</small>
+            </div>
+            <!-- Поле "Телефон для связи" -->
+            <div class="form-group">
+                {{ form.work_phone.label_tag }}
+                {{ form.work_phone }}
+                <small class="text-danger">{{ form.work_phone.errors }}</small>
+            </div>
+            <!-- Поле "Сетевое оборудование" -->
+            <div class="form-group">
+                {{ form.network_equipment.label_tag }}
+                {{ form.network_equipment }}
+                <small class="text-danger">{{ form.network_equipment.errors }}</small>
+            </div>
+            <!-- Поле "Периферийное оборудование" -->
+            <div class="form-group">
+                {{ form.peripheral_equipment.label_tag }}
+                {{ form.peripheral_equipment }}
+                <small class="text-danger">{{ form.peripheral_equipment.errors }}</small>
+            </div>
+            <!-- Поле "Разное" -->
+            <div class="form-group">
+                {{ form.other_info.label_tag }}
+                {{ form.other_info }}
+                <small class="text-danger">{{ form.other_info.errors }}</small>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check"></i> Добавить
+                </button>
+                <a href="{% url 'work' %}" class="btn btn-secondary ml-2">
+                    <i class="fas fa-arrow-left"></i> Назад
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Подключение Bootstrap JS и зависимостей -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+

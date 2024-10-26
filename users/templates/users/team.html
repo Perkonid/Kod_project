@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Команда</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Подключение Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Подключение собственного стиля -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4"><i class="fas fa-users"></i> Команда</h1>
+
+        <!-- Сообщения -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Форма добавления пользователя -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="fas fa-user-plus"></i> Добавить пользователя</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <!-- Поля формы -->
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        <small class="text-danger">{{ form.username.errors }}</small>
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                        <small class="text-danger">{{ form.password.errors }}</small>
+                    </div>
+                    <div class="form-group">
+                        {{ form.role.label_tag }}
+                        {{ form.role }}
+                        <small class="text-danger">{{ form.role.errors }}</small>
+                    </div>
+                    <!-- Кнопка отправки -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Добавить пользователя
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Список пользователей -->
+        <h2 class="text-center mb-4"><i class="fas fa-user-friends"></i> Список пользователей</h2>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Роль</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.get_role_display }}</td>
+                    <td>
+                        <form action="{% url 'delete_user' user.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Удалить пользователя?');">
+                                <i class="fas fa-trash-alt"></i> Удалить
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Кнопки внизу экрана -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'work' %}" class="btn btn-primary mr-2">
+                <i class="fas fa-briefcase"></i> Работа
+            </a>
+            <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Подключение Bootstrap JS и зависимостей -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+/* Общие стили */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: #343a40;
+}
+
+/* Карточка формы */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Кнопки */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Иконки в кнопках */
+.btn i {
+    margin-right: 5px;
+}
+
+/* Поля формы */
+.form-control {
+    border-radius: 5px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+/* Сообщения об ошибках */
+.text-danger {
+    font-size: 0.9em;
+}
